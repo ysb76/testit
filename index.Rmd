@@ -1,0 +1,473 @@
+---
+title       : Data at the Table
+subtitle    : 
+author      : Pat Meehan | PS Analytics Consulting
+job         : 
+framework   : io2012        # {io2012, html5slides, shower, dzslides, deck.js, ...}
+highlighter : highlight.js  # {highlight.js, prettify, highlight}
+hitheme     : tomorrow      # 
+theme       : web-2.0         # {web-2.0, swiss }
+transition  : horizontal-slide          # {horizontal-slide, vertical-slide, fade}
+widgets     : [mathjax, quiz, bootstrap, interactive] # {mathjax, quiz, bootstrap}
+mode        : selfcontained # {standalone, draft}
+knit        : slidify::knit2slides
+--- #custom1
+
+<link href="http://fonts.googleapis.com/css?family=Bebas Neue" rel="stylesheet" type="text/css">
+<link href='http://fonts.googleapis.com/css?family='Open Sans' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" href="./font-awesome-4.7.0/css/font-awesome.min.css">
+
+<style>
+.title-slide {
+  background-color: #808080; /*#CBE7A5;*/ /* #EDE0CF; ; #CA9F9D*/
+}
+.title-slide hgroup > h1, .title-slide hgroup > h2 {
+  font-family: 'Bebas Neue', sans-serif;  /* alt font - droidsans */
+  color: #FFFFFF;
+}
+.title-slide hgroup > p {
+  font-family: 'Open Sans', sans-serif;
+  color: #FFFFFF;
+}
+
+#custom1 {
+  background-color: #777;
+  font-weight: 700;
+  }
+#custom1 h1 {
+  color: white;
+  text-align: center;
+  }
+#custom1 h2 {
+  color: white;
+  font-weight: 700;
+  font-size: 70px;
+  text-align: center;
+  padding-top: 175px;
+  }
+#custom1 h3 {
+  color: white;
+  text-align: center;
+  }
+#custom1 ul {
+  padding-left: 100px;
+}
+#custom1 li {
+  font-size: 36px;
+}
+#custom1 li::before {
+  font-size: 1.5em;
+  left: 2.5em;
+  }
+#custom2 {
+  font-size: 36px;
+  font-weight: 700;
+  }
+#custom3 {
+  background-color: #777;
+  font-weight: 700;
+  }
+#custom3 h1 {
+  color: white;
+  text-align: center;
+  }
+#custom3 h2 {
+  color: maroon;
+  font-weight: 700;
+  font-size: 52px;
+  text-align: center;
+  padding-top: 50px;
+  }
+#custom3 h3 {
+  color: #333;
+  font-weight: 700;
+  text-align: center;
+  margin-top: -80px;
+  }
+#custom4 ol {
+  background-color:#777; 
+  color:white; 
+  font-weight:bold; 
+  padding:40px;
+  border-radius:1%;
+}
+#custom4 li {
+  padding-bottom:10px;
+  padding-left:10px;
+  margin-left:40px;
+  color:white;
+  font-size:26px; 
+}
+#custom5 {
+  background-color: #777;
+  font-weight: 700;
+  }
+#custom5 h1 {
+  color: white;
+  text-align: center;
+  }
+#custom5 h2 {
+  color: white;
+  font-weight: 700;
+  font-size: 70px;
+  text-align: center;
+  padding-top: 80px;
+}
+.thankyou h1{
+  text-align: center;
+  font-size:80px;
+}
+.addvert {
+  padding-top: 275px
+}
+.imgframe
+    { background:#ffffff;
+    padding:12px;
+    border:1px solid #999999; }
+
+    
+<!-- .title-slide hgroup > h1,  -->
+<!-- .title-slide hgroup > h2, .title-slide hgroup > p { -->
+<!--   color:   #FFFFFF;  /*#535E43;*/  /* ; #EF5150*/ -->
+<!-- } -->
+
+article p, article li, article li.build, section p, section li{
+  font-family: 'Open Sans','Helvetica', 'Crimson Text', 'Garamond',  'Palatino', sans-serif;
+  text-align: justify;
+  font-size:22px;
+  line-height: 1.5em;
+  color: #444;
+}
+</style>
+
+
+## QUEM
+
+# Quality Evidence Matters
+
+<aside class="notes">
+Trying to add presenter notes here.
+</aside>
+
+*** pnotes
+Did you know that there is a new debate about how to survive a riptide?  My 
+husband is from Hawaii and I (have to) visit regularly to see all of my in-laws.  I've learned a lot about local perspectives on the ocean.  In particular, their 
+I see resignation when there's another news report on TV about another tourist 
+or touristing couple who were swept away by the ocean.  Gentle head shakes and 
+"Never turn your back on the ocean."  is murmered throughout the room.  Oh, 
+what are people supposed to do?  Walk backwards up the beach.  Of course.  So, 
+I learned that lesson and passed it on to my kids.  So far, none of us has been 
+swept away.  But what about rip currents?  Th National Oceanic and Atomospheric 
+Administration (NOAA) defines a rip current as "a narrow, river-like channel 
+moving away from the shore at high speed."  [Some conflate the terms rip current 
+and rip tide, but rip tides are a "distinctly separate type of current ... that 
+includes both ebb and flood tidal currents that are caused by egress and ingress 
+of the tide through inlets and the mouths of estuaries, embayments, and 
+harbors."]  In the US, lifeguards saved over 48,000 people from rips in 2015 
+and, annually, almost 100 people die in rips. NOAA's public advisory campaign 
+is to "break the rip of the grip" and swim parallel to shore - so, don't fight 
+the current, swim parallel until you're free of the current, then swim at an 
+angle (away from the current) toward shore.  But Australia is now recommending 
+something different: just go with the flow.  According to research by Jamie MacMahan of the Naval Postgraduate School (and published in Marine Geology in 
+2010), "eighty to ninety percent of rips flow in huge circles ... every few minutes."  So, swimmers following the advice posted at the beach with have a 
+50/50 change of paddling against the current.  MacMahan's advice: "If you can releax - and it's a long time, for maybe three minutes - you're generally going 
+to float back to the beach."  Based on his research, Austrialia has completely 
+changed the advice Australia gives it citizens about how to survive a rip.  
+But the US is polarized.  The International Life Saving Federation chief, Chris 
+Brewster, is unhappy that MacMahon's ideas are in the press.
+“You have to understand: Jamie looks at it from a very scientific perspective. The logical thing, in his view, is try floating and see if that works.” But nothing is logical when you’re being sucked out sea in pounding surf. “Are you going to make that very, shall we say ‘dispassionate’ decision, when you think you might die?”
+
+Recent research on the East Coast by Rogers, a coastal erosion expert affiliated with the research outfit North Carolina Sea Grant, showed that while most rips in North Carolina do circulate, about half stopped after several laps and deposited any floating GPS trackers out to sea, past the breakers. Rogers says that while circulating cells most definitely exist—and are particularly persistent where MacMahan carried out his research in California—the phenomenon isn’t consistent or widespread enough to change the way we talk about surviving rips. Every beach is different, Roger says.
+
+Recent research on the East Coast by Rogers, a coastal erosion expert affiliated with the research outfit North Carolina Sea Grant, showed that while most rips in North Carolina do circulate, about half stopped after several laps and deposited any floating GPS trackers out to sea, past the breakers. Rogers says that while circulating cells most definitely exist—and are particularly persistent where MacMahan carried out his research in California—the phenomenon isn’t consistent or widespread enough to change the way we talk about surviving rips. Every beach is different, Roger says.
+
+
+Back to QuEM.  I'm going to tell you why it matters, what it looks like, and why it's hard to get.
+
+If someone offers you a 162-page report to "get familiar with your organization and it's performance," RESIST.  Unless it is organized by a set of key questions with findings that directly relate to these questions - and you agree that these questions address the key drivers of your organization's most important work, RESIST.
+
+RESIST because it's not just a waste of your time and energy but because it also takes your attention away from your focus.  
+
+What key information do you need to make your next decision?
+
+
+---  #flow
+
+## <span style="padding-bottom:-50px">PS Analytics Consulting</span>
+### *Supporting leadership teams with custom analytics*
+
+</br></br>
+
+<table>
+<tr>
+<td><h1> <p>3294839</br> JFRghl9LJO#%YES</br> (D*GDVLDJOFIJgrade<br> yr2016ES4Mathplan </br> MF83PA#&SWD89ADV</br> ELAjo74398lang </br> SIP3>4873 </p></h1> </td>
+<td style="padding-top:100px; font-size:36px;">&#8594</td>
+<td><h5></br></br>Statistician</br>&</br>Developer</h5></td>
+<td style="padding-top:100px; font-size:36px;">&#8594</td>
+<td><h1></br></br></br><p style="font-size:24px">Custom Tools</p></td>
+</tr>
+</table>
+
+--- #custom5
+
+## The Same Message for All
+
+<center>
+<img src="./assets/img/heads with data.png" height=400 width=400 class="imgframe"/>
+</center>
+
+*** pnotes
+### Causes of Data Misinformation
+
+*** pnotes
+Difference in domain expertise, aggregation obscures truth
+
+9 Causes of Data Misinterpretation (Information Week article)
+1. Insufficient domain expertise
+2. Important variables are ommitted (gender - is it that boys show lower reading performance or kids who sit in the back of the class?)
+3. Aggegation obscures truth
+4. Inferences are off base  (all are conditional on the group studied)
+5. Sources of variation overlooked (after or before-school programs; desk neighbors in classroom; scheduling conflicts for services that interfere with, say, library time)
+6. Statistical thinking trumps thinking (testing many hypothesis in search of *significance)
+7. Numerical analysis missed something.  (Data visualizations can reveal anomalies that could be overlooked in numerical analysis.  Outliers are immediately obvious visually.  Nonlinear relationships result in a small correlation coefficient but are easy to recognize visually.)
+8. Correlation is mistaken for causation.  (Journal stated: eye color a potential indicator of alcohol dependence among European Americans.  
+9. Explanation adds distortion.  (Jargon may sound scientific but may also confuse the audience.)
+
+--- #custom1
+
+</br></br></br></br>
+<center>
+<img src="./assets/img/digital-capability.png" height=800 width=600 class="imgframe"/>
+</center>
+
+*** pnotes
+<h3 style="font-size:36px; color:darkslategrey; font-weight:700">How do leadership teams create strategic plans?</h3>
+
+--- #custom3
+
+## Decision Neuroscience 
+
+### Not Just What But How
+
+</br>
+<center>
+<img src="./assets/img/emoji_hmm2.png" height=200 width=200/>
+</center>
+
+</br>
+<table class="css1">
+<tr>
+<td class="noBorder"></td>
+<td class="noBorder">&bull; Perception</td>
+<td class="noBorder">&bull; Cognition</td>
+<td class="noBorder">&bull; Time to decision</td>
+</tr>
+</table>
+
+*** pnotes
+* How we share information determines what people will take away from it
+**Analytic design fits into the science of information processing:**
+
+* perception involves the organization and processing of what we see
+* cognition - making sense out of the information; integrate and generalize the information; early visual stages are largely independent of cognitive factors, late visual stages are more influenced by our knowledge (matching object to achieve recognition) [Tacca, 2011]
+* decision making
+
+* perception is selective; attention to one aspect of inupt suppresses processing 
+of other features
+
+* people see differences, not absolutes; illusions; emphasize most important information
+
+* scanning - where people look depends on their background knowledge; people learn 
+something more easily if they can relate it to something they know (idea - would it 
+be advantageous to provide graphs including relevant prior info then click a button 
+to add current year data?)
+
+* manage cognitive load (people rely on heuristics or "rules of thumb" to help cope with unfamiliar situations by reducing their complexity in order to negotiate their circumstances or make decisions more quickly (army ref doc); information overload
+
+* two main modes of thinking (Daniel Kahneman): intuitive and analytical; guide users to analytical thinking through ...
+
+* Data visualization is effective because it shifts the balance between perception and cognition; visual perception (seeing) is extremely fast and efficient.  One of the most powerful ways to extend our attention and memory is to encode information visually to exploit our ability to chunk information. [Few - 35. Data Vis for Human Perception
+
+* Several universities have developed graduate programs that are dedicated to the study and advancement of data visualization. The University of Maryland, Stanford, the University of North Carolina, the University of California, Berkeley, and Georgia Tech are a few of the finest. Although several periodicals in the broader fields of computer graphics and human-computer interaction include articles about data visualization, only one academic journal features the field exclusively: Information Visualization Journal, published quarterly by Palgrave Macmillan. A few smaller publications focus on making data visualization practical and accessible to a broader audience, such as the Visual Business Intelligence Newsletter. Conferences dedicated to the field are also few. The oldest, IEEE's VisWeek, which includes the InfoVis and VAST (Visual Analytics Science and Technology) sub-conferences that are dedicated entirely to data visualization, remains the largest and perhaps best of the conferences, but significant work in the field also appears in other conferences of broader perspective, such as CHI (Computer-Human Interaction) and SIGGRAPH. [Few - Ch35]
+
+* Leadership teams - large-scale survey of business executives (2003) revealed that leadership teams spend relatively little time together, meetings are relatively short (under four hours), meeting agendas are often driven by the crisis of the moment, historical precedent, or egalitarianism (everyone gets a chance to speak); too little attention is paid to making strategic decisions
+
+* Conclusions - keep it simple and clear; represent quantities accurately; display 
+relevant anchor; use colors, shapes, proximity, and movement to highlight connections and similarity.  Changes to improve:  send data out before meetings; prioritize issues according to value
+
+* Examples of viz that mislead:  wtfviz.net and perceptualedge.com viz IQ test
+
+* What good viz do well:  easily, efficiently, accurately, and meaningfully perceive the story the data has to tell (Few); highlight patterns, trends, exceptions, represent quantities accurately, makes comparison easy, 
+
+* My guiding principles:  focused, parsimonious, anchored, layered
+
+Deborah Frinckle (Dir Research, NASA):  *Nonexperienced consumer of data analytics exhibits anchor bias* (WIDS, Stanford, 2017)
+
+
+
+
+--- 
+## What's your takeaway?
+
+</br>
+<center>
+<img src="./assets/img/MA MCAS table.png" height=1200 width=1000/>
+</center>
+
+*** pnotes
+Add a graph - 
+Sample data and/or dashboard.  Not longitudinal, without clear anchor (g4 math MA).
+
+
+--- #custom1
+
+## “Nothing ever exists entirely alone. Everything is in relation to everything else.” – Buddha
+
+<center style="font-size:24; color:#999;">
+Agree:  Tufte, Cleveland, Tukey, Few, Kahneman
+</center>
+
+*** pnotes
+Others who agree:  Edward Tufte, William Cleveland, John Tukey, Stephen Few, Daniel Kahneman
+
+Few - perceptualedge.com
+
+
+--- #custom3
+
+## Interactive Visuals 
+
+</br></br>
+<span style="font-size:32px; color:white; text-align:center">*Overview first, zoom and filter, then details on demand*</span>
+
+
+</br></br></br></br></br>
+*Ben Schneiderman, University of Maryland Human-Computer Interaction Lab
+
+
+*** pnotes
+Ben Schneiderman's "information-seeking mantra"
+
+The overview should summarize the overarching story from the entire data set without getting into the minor details. It shouldn’t overload the user with too much data, which is where interactive charts, gauges, and maps serve to reduce data clutter, and bring out the story more powerfully.
+
+Once all the data is presented to the user in the overview section, the viewer will want to focus on particular areas of interest.
+
+... give the viewer access to the minute details. This would bring them as close as possible to the raw data, and equip them to find what they started looking for. This third layer of data would be less visual, and more text-heavy with a focus on accurate information rather than trends. (https://www.recordedfuture.com/information-seeking-mantra/; also provides examples); The Recorded Future Blog; How to Use the Information-Seeking Mantra in Cyber Intelligence Dashboards; Posted in Company by Twain Taylor on September 10, 2014
+
+*Abstract information spaces require an overview so the user has an idea where to even find data, but then it is necessary to zoom in to see details. Filtering data is important when dealing with larger datasets. Finally, details on what is shown (and also what is not shown) can be retrieved by the user as needed. All of these steps require interaction, where the user tells the visualization what he or she wants to see.*  (Robert Kosara) - Change this to a flow chart
+
+* If you've been to conference with math (MIT) guru, I believe he talks about the view of a bee.  I tend to think about a helicopter view.  To me, this is a very natural data analysis perspective.
+
+--- &radio
+
+### **Data in Context**
+## How is grade 4 performance?
+
+Eleanor scores 680 on the Mathematics part of the SAT. The distribution of SAT scores in a reference population is Normal, with mean 500 and standard deviation 100. Gerald takes the American College Testing (ACT) Mathematics test and scores 27. ACT scores are Normally distributed with mean 18 and standard deviation 6. Assuming that both tests measure the same kind of ability, who did better?
+
+1. _Eleanor_
+2. Gerald
+
+*** .explanation
+
+The best way to compare their performance is to calculate their standardized scores.
+
+$$z_E = \frac{680 - 500}{100} = `r (680 - 500)/100`$$
+$$z_G = \frac{27 - 18}{6} = `r (27 - 18)/6`$$
+
+Since, Eleanor has a higher standardized score, we can conclude that Eleanor did better!
+
+--- #custom1
+
+## Graphical Principles of PSA
+
+<center style="color:maroon">
+Focused | Clear | Anchored | Layered
+</center>
+
+*** psnotes
+Can't just build.  Need to understand something about how humans perceive information depending on presentation choices and how anchors help them make sense of it.  Now we have a philosophy of graphical design that provides focus, clarity, and anchors so that key information is nonignorable.  And details are persuable.  
+
+--- #custom4
+
+<i class="fa fa-cog" style="color:#333; font-size:84px;"></i>
+<i class="fa fa-cog" style="color:darkslategrey; font-size:42px;"></i>
+<i class="fa fa-cog" style="color:#444; font-size:54px;"></i>
+
+<ol> 
+<li>No software purchase - open source R </li>
+<li>Easily reproducible & updatable - script-based </li>
+<li>Extendable - modularized </li>
+<li>Hosted locally or web-based </li>
+<li style="color:#333">Informed by a statistics perspective </li>
+</ol>
+
+</br>
+<center style="color:maroon; font-style:italic;">**Visual, interactive, and easy to share**</center>
+
+*** pnotes
+<center style="color:darkslategrey; font-style:italic;">**Not just a tool, not just data ... a scientific approach to insight.**</center>
+
+*"Provide a product that is scientific and data-driven and can help people" (Julie Woo, Chief Data Scientist, pymetrics) [WIDS, Stanford, 2017]
+
+---
+## Ongoing communication and guidance ...
+
+</br>
+<center>
+<img src="./assets/img/Ed Leadship Data issue - 2009.jpg" height=250 width=250/></br>
+**2009**
+</center>
+
+*** pnotes
+List titles of articles; what's been done since?
+
+
+--- #custom1 
+
+## Ready for analytics by design?
+
+<!-- <ul style="padding-left: 100px"> -->
+
+> - Do you know your questions?
+> - Do you have relevant data?
+> - Committed to data at the table?
+
+
+--- .thankyou .addvert
+
+# **thank**<span style="color:lightslategrey; font-weight:700">you</span>
+
+</br></br></br></br></br>
+<center>
+<span style="color:darkslategrey; font-size: 20px; font-family="Open Sans;">
+Pat Meehan | PS Analytics Consulting </span> </br>
+<span style="color:darkslategrey; font-size: 20px; font-family="Open Sans; 
+display:none;">
+meehanpm@psanalyticsconsulting<span>.</span>com
+</span>
+</center>
+
+*** pnotes
+
+Should I provide a data viz quiz with autoscoring?
+
+The idea is not to mechanically produce as much information as quickly as possible, it's more like sifting through sand to find the most valuable information/evidence/patterns.  Information is assigned value based its the weight in the decision making and assessment processes.
+
+Our build design makes it easier for your team to follow the approach.
+
+Build scientific approach into decision making.
+
+Use, misuse, unintended consequences.
+
+Innovation with data.  Predictive analytics.  Women state their confidence interval; men state opinion as fact.  
+
+Intuition about data science; when results don't feel right.  Models reflect biases of data and create their own biases.  
+
+Data science; social responsibility; quality control is one of the hardest parts of data science.  
+
+GOALS:  Make leadership team look good - smart, expert, cutting-edge, informed, in-the-know
+
+MY APPROACH - need to build my network to vet and improve ideas; build my audience - go public; and build my community so others can connect about the ideas
+
+<!-- http://robert.walls.ninja/SlidifyTest/ -->
